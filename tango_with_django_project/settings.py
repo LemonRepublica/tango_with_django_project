@@ -130,5 +130,5 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static /'
 
