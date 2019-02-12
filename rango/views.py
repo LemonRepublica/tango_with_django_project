@@ -4,6 +4,9 @@ from rango.models import Category
 from rango.models import Page
 from rango.forms import CategoryForm
 from rango.forms import PageForm
+from rango.forms import UserForm
+from rango.forms import UserProfileForm
+from django.template import RequestContext
 
 def index(request): 
     # Construct a dictionary to pass to the template engine as its context. 
