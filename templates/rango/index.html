@@ -1,57 +1,46 @@
-{% extends 'rango/base.html' %}
+<!DOCTYPE html>
 {% load staticfiles %}
-
-{% block title_block %}
-Rango
-{% endblock %}
-{% block body_block %}
-    <ul>
-        {% if user.is_authenticated %}
-              <li><a href="{% url 'restricted' %}">Restricted Page</a></li>
-              <li><a href="{% url 'logout' %}">Logout</a></li>
-         {% else %}
-            <li><a href="{% url 'register' %}">Register Here</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-        {% endif %}
-    </ul>
+<html>
+    <head>
+        <title>Rango</title>
+    </head>
     
-    {% if user.is_authenticated %}
-        <h1>Rango says... hello {{ user.username }}!</h1>
-    {% else %}
-        <h1>Rango says... hey there partner!</h1>
-    {% endif %}
-    
-    {% if user.is_authenticated %}
-	    <a href="{% url 'add_category' %}">Add a New Category</a><br/>
-	{% else %}
-	      <strong>Only user can add category.</strong>
-	{% endif %}
-	
-	<h3>Most Liked Categories</h3>
-    <div>
-    {% if categories %}
-    <ul>
-        {% for category in categories %}
-        <!-- Following line changed to add an HTML hyperlink -->
-        <li><a href="{% url 'show_category' category.slug %}">{{ category.name }}</a></li>
-            {% endfor %}
-    </ul>
-    {% else %}
-        <strong>There are no categories present.</strong>
-    {% endif %}
-    </div>
-    <h3>Most Viewed Pages</h3>
-    {% if page %}
+    <body>
+        <h1>Rango says...</h1>
+        <div>
+            hey there partner!
+        </div>
+        <h3>Most Liked Categories</h3>
+        <div>
+        {% if categories %}
         <ul>
-		    {% for pages in page %}
-		    	<li><a href="{{ pages.url}}">{{ pages.title }}</a></li>
-		    {% endfor %}
-    	</ul>
-    {% else %}
-	<strong>There are no page present.</strong>
+            {% for category in categories %}
+            <!-- Following line changed to add an HTML hyperlink -->
+            <li>
+            <a href="/rango/category/{{ category.slug }}">{{ category.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
+        </div>
+        <h3>Most Viewed Pages</h3>
+
+        {% if page %}
+	<ul>
+		{% for pages in page %}
+			<li>
+			<a href="{{ page.url }}">{{ page.title }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+        {% else %}
+		<strong>There are no page present.</strong>
 	{% endif %}
-    <div>
-        <a href="{% url 'about' %}">About Rango</a><br />
-        <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" /> 
-    </div>
-{% endblock %}
+        <div>
+            <a href="/rango/about/">About Rango</a><br />
+            <img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" /> 
+        </div>
+    </body>
+</html>
