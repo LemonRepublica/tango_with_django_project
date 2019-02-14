@@ -6,8 +6,8 @@ Created on Sun Feb 10 18:54:33 2019
 """
 
 from django import forms
+from rango.models import Page, Category, UserProfile
 from django.contrib.auth.models import User
-from rango.models import Category, Page, UserProfile
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=128,
